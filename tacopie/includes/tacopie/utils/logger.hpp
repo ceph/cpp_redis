@@ -103,10 +103,14 @@ public:
   //! dtor
   ~logger(void) = default;
 
-  //! copy ctor
-  logger(const logger&) = default;
-  //! assignment operator
-  logger& operator=(const logger&) = default;
+   //! copy ctor: Commented out due to inability to move mutex member variable.
+  /*
+   * logger(const logger&) = default;
+   */
+  //! assignment operator: Commented out due to inability to move mutex member variable.
+  /*
+   * logger& operator=(const logger&) = default;
+   */
 
 public:
   //!
