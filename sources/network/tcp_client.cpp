@@ -52,7 +52,7 @@ void
 tcp_client::async_read(read_request& request) {
   auto callback = std::move(request.async_read_callback);
 
-  m_client.async_read({request.size, [=](tacopie::tcp_client::read_result& result) {
+  m_client.async_read({request.size, [=, this](tacopie::tcp_client::read_result& result) {
                          if (!callback) {
                            return;
                          }
@@ -66,7 +66,7 @@ void
 tcp_client::async_write(write_request& request) {
   auto callback = std::move(request.async_write_callback);
 
-  m_client.async_write({std::move(request.buffer), [=](tacopie::tcp_client::write_result& result) {
+  m_client.async_write({std::move(request.buffer), [=, this](tacopie::tcp_client::write_result& result) {
                           if (!callback) {
                             return;
                           }

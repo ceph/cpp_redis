@@ -266,7 +266,7 @@ sentinel::sync_commit() {
   try_commit();
   std::unique_lock<std::mutex> lock_callback(m_callbacks_mutex);
   __CPP_REDIS_LOG(debug, "cpp_redis::sentinel waiting for callbacks to complete");
-  m_sync_condvar.wait(lock_callback, [=] { return m_callbacks_running == 0 && m_callbacks.empty(); });
+  m_sync_condvar.wait(lock_callback, [=, this] { return m_callbacks_running == 0 && m_callbacks.empty(); });
   __CPP_REDIS_LOG(debug, "cpp_redis::sentinel finished waiting for callback completion");
   return *this;
 }

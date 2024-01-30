@@ -132,7 +132,7 @@ namespace cpp_redis {
 
 				std::unique_lock<std::mutex> lock_callback(m_callbacks_mutex);
 				__CPP_REDIS_LOG(debug, "cpp_redis::sentinel waiting for callbacks to complete");
-				if (!m_sync_condvar.wait_for(lock_callback, timeout, [=] {
+				if (!m_sync_condvar.wait_for(lock_callback, timeout, [=, this] {
 						return m_callbacks_running == 0 && m_callbacks.empty();
 				})) {
 					__CPP_REDIS_LOG(debug, "cpp_redis::sentinel finished waiting for callback");
